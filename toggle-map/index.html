@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Simple Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+      <style>
+        #menu {
+          position: absolute;
+          background: #fff;
+          padding: 10px;
+          font-family: 'Open Sans', sans-serif;
+        }
+      </style>
+  
+    <div id='map'></div>
+    <div id='menu'>
+      <input id='light' type='radio' name='rtoggle' value='light'>
+      <label for='light'>light</label>
+      <input id='satellite' type='radio' name='rtoggle' value='satellite'>
+      <label for='satellite'>satellite</label>
+    </div>
+
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibWFyZW5hYiIsImEiOiJjajV2ajVyZXUwMnN3MzNwNzR3Ynk2cjIyIn0.sI-ynx23EEdpZFbEDu6qjA'; // replace this with your access token
+    
+    // Set bounds to location - use geojson.io or coordinates in Studio
+    var bounds = [
+    [38.111572265625, -6.986406835762532], // Southwest coordinates
+    [40.484619140625, -5.244127581489528]  // Northeast coordinates
+    ];
+
+    // Initialize map
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/light-v9', // replace this with your style URL
+      center: [39.34204101562499, -6.129631376647244],
+      zoom: 8,
+      maxBounds: bounds // Sets bounds as max
+    });
+
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // Create map refresh function for when style toggle is used
+  function mapReset() {
+    
+  }
+  // Initialize map, with reset function
+
+  map.on('style.load', function() {
+    mapReset();
+
+    // Add sources
+    // Add a new source from our GeoJSON data
+    //...
+    
+
+// Toggle styles
+    var layerList = document.getElementById('menu');
+    var inputs = layerList.getElementsByTagName('input');
+
+    function switchLayer(layer) {
+      var layerId = layer.target.id;
+      map.setStyle('mapbox://styles/mapbox/' + layerId + '-v9');
+    }
+
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].onclick = switchLayer;
+      }
+
+    
+  });
+
+    </script>
+</body>
+</html>

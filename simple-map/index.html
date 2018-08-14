@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Simple Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+  
+    <div id='map'></div>
+
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibWFyZW5hYiIsImEiOiJjajV2ajVyZXUwMnN3MzNwNzR3Ynk2cjIyIn0.sI-ynx23EEdpZFbEDu6qjA'; // replace this with your access token
+    
+    // Set bounds to location - use geojson.io or coordinates in Studio
+    var bounds = [
+    [38.111572265625, -6.986406835762532], // Southwest coordinates
+    [40.484619140625, -5.244127581489528]  // Northeast coordinates
+    ];
+
+    // Initialize map
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/light-v9', // replace this with your style URL
+      center: [39.34204101562499, -6.129631376647244],
+      zoom: 8,
+      maxBounds: bounds // Sets bounds as max
+    });
+
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl());
+
+
+    </script>
+</body>
+</html>
